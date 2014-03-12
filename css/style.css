@@ -1,0 +1,59 @@
+@import url(../components/foundation/css/normalize.css);
+@import url(../components/foundation/css/foundation.min.css);
+@import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
+body {
+  background-color: #FFF;
+  font-family: 'Lato', sans-serif;
+  font-weight: 300;
+  font-size: small;
+  text-align: center; }
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  margin-left: 10px;
+  margin-right: 10px; }
+
+.event {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16pt; }
+  .event h1 {
+    font-size: 26pt; }
+  .event .title {
+    font-size: 26pt; }
+  .event .time {
+    font-weight: bold; }
+  .event .people {
+    margin: 25px 0px 5px 0px;
+    font-weight: 500; }
+  .event .status {
+    margin: 25px 0px 0px 0px; }
+  .event p {
+    font-size: 16pt; }
+  .event .avatar-column {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    text-align: left; }
+  .event .button {
+    /*		border-radius: 5px; */ }
+  .event .button:hover, .event .selected {
+    background-color: orange; }
+  .event input[type=radio] {
+    display: none;
+    margin: 10px; }
+    .event input[type=radio] + label {
+      display: inline-block;
+      margin: 0px 0px 0px 1px;
+      padding: 16px 20px;
+      color: #3c80ea;
+      background-color: #e7e7e7;
+      border-color: #f4f2ee;
+      font-size: 14pt; }
+  .event input[type=radio]:hover + label {
+    background-image: none;
+    background-color: #d0e1ff; }
+  .event input[type=radio]:checked + label {
+    background-image: none;
+    background-color: #d0e1ff; }

@@ -1,0 +1,19 @@
+{
+  "name": "fatcal-webapp",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.3",
+    "requirejs": "~2.1",
+    "grunt-contrib-jshint": "~0.6.3",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-handlebars": "~0.7.0",
+    "grunt-contrib-coffee": "~0.10.1",
+    "http-server": "~0.6.1",
+    "grunt-contrib-sass": "~0.7.3",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-http-server": "0.0.4",
+    "grunt-contrib-requirejs": "~0.4.3",
+    "grunt-string-replace": "~0.2.7"
+  }
+}
