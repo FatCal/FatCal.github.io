@@ -11,8 +11,8 @@ define
 
 		});
 
-		App.EventController = Ember.ObjectController.extend
-		({
+		App.EventController = Ember.ObjectController.extend(
+		{
 			isAttendee: false,
 			isNotEditing: true,
 			attendingStatusSelected: 0,

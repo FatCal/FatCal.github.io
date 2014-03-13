@@ -14,7 +14,10 @@
     "jquery-ui-amd": "latest",
     "pickadate": "latest",
     "modernizr" : "latest",
-    "foundation" : "latest"
+    "foundation" : "latest",
+    "query" : "latest",
+    "ember-simple-auth": "https://github.com/simplabs/ember-simple-auth-component.git",
+    "ua-parser-js" : "latest"
   },
   "devDependencies": {
     "ember-mocha-adapter": "0.1.2"

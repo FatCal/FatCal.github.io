@@ -26,8 +26,8 @@ module.exports = (grunt) ->
 							requireLib: 'components/requirejs/require'
 						mainConfigFile: "js/main.js"
 						name: "js/main"
-						out: "js/main.min.js"
 						include: ['requireLib']
+						out: "js/main.min.js"
 				'compile-css':
 					options:
 						cssIn: "css/style.css"

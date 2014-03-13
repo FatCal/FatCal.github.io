@@ -9,11 +9,7 @@ define
 		App.Adapter = DS.ActiveModelAdapter.reopen({
 				host: 'http://fatcal.datareklam.se',
 				namespace: 'api/v1',
-				headers: 
-				{
-					"Authorization": "Oauth 9d86a906ec1164d6afadf8caeb1544e50ff952fbe0ad86dd6b391f803b05c7db"
-//					"Authorization": "Oauth 0b3fcf7a9fbb984d6592a0d91c08f074eb88e9f9773473fbbf2156d9faf7be74" 
-				}
+				headers: {}
 			});
 
 		App.Store = DS.Store.extend({

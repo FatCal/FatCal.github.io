@@ -13,7 +13,10 @@ require.config({
 //		'jqueryui': 		'components/jquery-ui-amd/jquery-ui-1.10.0/jqueryui',
 		'pickadate': 		'components/pickadate/lib/picker',
 		'pickadate-date':	'components/pickadate/lib/picker.date',
-		'pickadate-time': 	'components/pickadate/lib/picker.time'
+		'pickadate-time': 	'components/pickadate/lib/picker.time',
+		'query': 			'components/query/query',
+//		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
+		'ua-parser-js': 	'components/ua-parser-js/src/ua-parser.min'
 	},
 	shim:
 	{
@@ -22,8 +25,8 @@ require.config({
 			deps: ['handlebars','jquery'],
 			exports: 'Ember'
 		},
-		'ember-data' : ['ember']
-
+		'ember-data' : ['ember'],
+//		'ember-simple-auth' : ['ember']
 	}
 });
 
@@ -39,6 +42,8 @@ requirejs.onError = function (err)
 
 require(
 	[
+		'ua-parser-js',
+
 		// controllers
 		'app/controllers/events',
 		'app/controllers/users',
@@ -57,6 +62,8 @@ require(
 
 		// components
 		'app/components/radio-button',
+		'app/components/pick-a-date',
+		'app/components/pick-a-time',
 
 		// templates
 		'app/app'
@@ -64,6 +71,11 @@ require(
 	], function(){
 
 		console.log("loaded");
+		var parser = new UAParser();
+		var result = parser.getResult();
+		console.log(result.device);
+		if(result.device.type == 'mobile' && result.os == 'ios')
+			window.location = "fatcal://";
 	}
 );
 

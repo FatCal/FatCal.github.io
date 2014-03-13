@@ -1,9 +1,7 @@
 define
 (
 	[
-		'app/app',
-		'ember',
-		'ember-data'
+		'app/app'
 	],
 	function(App)
 	{
@@ -24,8 +22,7 @@ define
 
 		});
 
-		App.EventRoute = Ember.Route.extend
-		({
+		App.EventRoute = Ember.Route.extend({
 			setupController: function(controller,event)
 			{
 				console.log("event: "+event.get('title'));

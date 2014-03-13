@@ -6,9 +6,32 @@ define('app/app',
 		'ember-data',
 		'pickadate',
 		'pickadate-date',
-		'pickadate-time'
+		'pickadate-time',
+		'query',
+//		'ember-simple-auth'
 	],function(){
 
+		// var QueryParamAuthenticator = Ember.SimpleAuth.Authenticators.OAuth2.extend({
+		// 	authenticate: function(credentials)
+		// 	{
+		// 		console.log("AUTHENTICATING!");
+		// 		var _this = this;
+		// 		return new Ember.RSVP.Promise(function(resolve,reject){
+					
+		// 			if(credentials.access_token)
+		// 			{
+		// 				result = {
+		// 					"access_token" : credentials.access_token,
+		// 					"token_type" : "bearer"
+		// 				}
+		// 				resolve(result);
+		// 			}
+		// 			else
+		// 				reject("No access token provided in credentials");
+
+		// 		});
+		// 	}
+		// });
 
 		console.log("app/app");
 		var App = window.App = Ember.Application.create({
@@ -20,92 +43,44 @@ define('app/app',
 			}
 		});
 
+//		App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin);
+
+		// App.initializer({
+		//   name: 'authentication',
+		//   initialize: function(container, application) {
+		//   	container.register("app:authenticators:queryParam",QueryParamAuthenticator)
+		//     Ember.SimpleAuth.setup(container, application);
+		//   }
+		// });
+
 		App.initializer({
 			name: "loadCurrentUser",
+//			after: "authentication",
 			initialize: function(container,application) {
 				App.deferReadiness();
+				console.log("App");
+				query.parse(window.location.href);
 				store = container.lookup("store:main");
+
+				if(query.get("token"))
+				{
+					DS.ActiveModelAdapter.reopen({
+									headers: 
+									{
+										"Authorization": "Oauth " + query.get("token")
+									}
+								});					
+				}
+
 				store.find("user","me").then(function(user){
 					App.me = user;
 					App.advanceReadiness();
 				});
 			}
 
-		})
+		 })
 
-		Ember.PickADate = Ember.View.extend({
-			attributes:['monthsFull', 'monthsShort', 'weekdaysFull', 'weekdaysShort', 'showMonthsShort', 'showWeekdaysFull', 'today','clear', 'format', 'formatSubmit', 'hiddenSuffix', 'firstDay', 'selectMonths','selectYears', 'min', 'max', 'disable', 'disablePicker'],
-			events: ['onOpen', 'onClose', 'onSet', 'onStart'],
-			
-			type: 'text',
-			tagName: 'input',
-			className: 'pickadate',
 
-			didInsertElement: function(){
-				var options = {};
-				var self = this;
-
-				this.get('events').forEach(function(event){
-					if(self[event])
-						options[event] = self[event];
-				});
-
-				this.get('attributes').forEach(function(attr){
-					if(self[attr])
-						options[attr] = self[attr];
-				});
-
-				var onSetCallback = options.onSelect;
-				options.onSet = function(){
-					Ember.set(self,'value',this.get('select'));
-					if(onSetCallback)
-						onSetCallback.call(this);
-				}
-
-				options.onStart = function(){
-					this.set('select',Ember.get(self,'value'));
-				}
-
-				this.$().pickadate(options);
-			}
-		});
-
-		Ember.PickATime = Ember.View.extend({
-			attributes:['clear','format','formatLabel','formatSubmit','hiddenPrefix','hiddenSuffix','interval','min','max','disable'],
-			events: ['onStart','onOpen','onClose','onSet','onStop'],
-
-			type: 'text',
-			tagName: 'input',
-			className: 'pickadate',
-
-			didInsertElement: function(){
-				var options = {};
-				var self = this;
-
-				this.get('events').forEach(function(event){
-					if(self[event])
-						options[event] = self[event];
-				});
-
-				this.get('attributes').forEach(function(attr){
-					if(self[attr])
-						options[attr] = self[attr];
-				});
-
-				var onSetCallback = options.onSelect;
-				options.onSet = function(){
-					Ember.set(self,'value',this.get('select'));
-					if(onSetCallback)
-						onSetCallback.call(this);
-				}
-
-				options.onStart = function(){
-					this.set('select',Ember.get(self,'value'));
-				}
-
-				this.$().pickatime(options);				
-			}
-		});
 
 		return App;
 	}
