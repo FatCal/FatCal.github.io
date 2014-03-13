@@ -16,7 +16,7 @@ define
 			isAttendee: false,
 			isNotEditing: true,
 			attendingStatusSelected: 0,
-			_attendingStatusInitalSet: false,
+			_attendingStatusInitialized: false,
 			startDate: function(){
 				return moment(this.get('model.start_date')).valueOf();
 			}.property('start_date'),
@@ -68,9 +68,11 @@ define
 			},
 			updateStatus: function(element,property)
 			{
-				var isInited = this.get('_attendingStatusInitalSet')
-				if(!isInited)
+				var isInited = this.get('_attendingStatusInitalized');
+				console.log("attending status updated, maybe update?");
+				if(isInited)
 				{
+					console.log("posting!");
 					var status = this.get('attendingStatusSelected');
 					var attendee = this.attendee();
 					attendee.set('status',status);
@@ -78,7 +80,7 @@ define
 				}
 				else
 				{
-					this.set('_attendingStatusInitalSet',true);
+					this.set('_attendingStatusInitalized',true);
 				}
 			}.observes('attendingStatusSelected'),
 			modelSet: function(controller,property)
@@ -88,7 +90,10 @@ define
 
 				controller.set('isAttendee',isAttendee);
 				if(isAttendee)
+				{
 					controller.set('attendingStatusSelected',att.get('status'));
+					console.log('attendingstatus updated to '+this.get('attendingStatusSelected'));
+				}
 
 
 			}.observes('model'),

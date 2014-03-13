@@ -26,34 +26,14 @@ module.exports = (grunt) ->
 							requireLib: 'components/requirejs/require'
 						mainConfigFile: "js/main.js"
 						name: "js/main"
-						out: "js/pmain.js"
+						out: "js/main.min.js"
 						include: ['requireLib']
 				'compile-css':
 					options:
 						cssIn: "css/style.css"
-						out: "css/pstyle.css"
-		'string-replace':
-			dev:
-				files:
-					"index.html"
-				options:
-					replacements: [
-						pattern: '$REQUIREJS'
-						replacement: 'src="components/requirejs/require.js" data-main="/js/main"'
-					]
-			production:
-				files:
-					"index.html"
-				options:
-					replacements: [
-						pattern: '$REQUIREJS'
-						replacement: 'src="/js/pmain.js"'
-					]
+						out: "css/style.min.css"
 
 
-
-
-			
 	grunt.loadNpmTasks 'grunt-contrib-watch'
 	grunt.loadNpmTasks 'grunt-contrib-uglify'
 	grunt.loadNpmTasks 'grunt-contrib-sass'
