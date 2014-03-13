@@ -36,11 +36,7 @@ define
 				var start_time = this.get('model.start_time');
 				var end_time = this.get('model.end_time');
 
-				m = moment({
-						year: start_date.getYear(),
-						month: start_date.getMonth(),
-						day: start_date.getDay(),
-					});
+				m = moment(start_date);
 				ts = moment({
 					hour: start_time.getHours(),
 					minutes: start_time.getMinutes()
@@ -49,7 +45,7 @@ define
 					hour: end_time.getHours(),
 					minutes: end_time.getMinutes()
 				});
-				return m.format("MMMM Do") + ", " + ts.format("h:mm a")+" - "+te.format("h:mm a");
+				return m.format("dddd Do MMMM") + ", " + ts.format("h:mm a")+" - "+te.format("h:mm a");
 			}.property('start_date','start_time','end_time'),
 			attendee: function(){
 				var attendee = null;
