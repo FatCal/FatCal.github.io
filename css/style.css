@@ -31,7 +31,9 @@ body {
   .event .status {
     margin: 25px 0px 0px 0px; }
   .event p {
-    font-size: 16pt; }
+    font-size: 16pt;
+    font-weight: 300;
+    text-align: left; }
   .event .avatar-column {
     margin-top: 5px;
     margin-bottom: 5px;
@@ -57,3 +59,7 @@ body {
   .event input[type=radio]:checked + label {
     background-image: none;
     background-color: #d0e1ff; }
+  .event .visible {
+    display: block; }
+  .event .hidden {
+    display: none; }

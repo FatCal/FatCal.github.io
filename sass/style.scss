@@ -56,6 +56,8 @@ body {
 
 	p {
 		font-size: 16pt;
+		font-weight: 300;
+		text-align: left;
 	}
 
 	.avatar-column {
@@ -101,6 +103,14 @@ body {
 	{
 		background-image: none;
 		background-color: #d0e1ff;					
+	}
+
+	// hero unit stuff
+	.visible {
+		display: block;
+	}
+	.hidden {
+		display: none;
 	}
 }
 

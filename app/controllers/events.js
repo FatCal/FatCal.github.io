@@ -17,6 +17,9 @@ define
 			isNotEditing: true,
 			attendingStatusSelected: 0,
 			_attendingStatusInitialized: false,
+			showAttendingHero: false,
+			showMaybeHero: false,
+			showRejectHero: false,
 			startDate: function(){
 				return moment(this.get('model.start_date')).valueOf();
 			}.property('start_date'),
@@ -73,12 +76,19 @@ define
 					var attendee = this.attendee();
 					attendee.set('status',status);
 					attendee.save();
+
+					this.set('showAttendingHero',status == 2);
+					this.set('showMaybeHero',status == 3);
+					this.set('showRejectHero',status == 4);
 				}
 				else
 				{
 					this.set('_attendingStatusInitalized',true);
 				}
 			}.observes('attendingStatusSelected'),
+			showHero: function(){
+				return this.get('showAttendingHero') || this.get('showMaybeHero') || this.get('showRejectHero')
+			}.property('showAttendingHero','showMaybeHero','showRejectHero'),
 			modelSet: function(controller,property)
 			{
 				var att = this.attendee();
@@ -90,8 +100,6 @@ define
 					controller.set('attendingStatusSelected',att.get('status'));
 					console.log('attendingstatus updated to '+this.get('attendingStatusSelected'));
 				}
-
-
 			}.observes('model'),
 			actions: {
 				edit: function()

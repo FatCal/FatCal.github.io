@@ -10,13 +10,20 @@
         <link rel="stylesheet" href="/css/style.min.css"/>
 
         <!-- JS -->
-        <!-- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script -->
+        <!--- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script -->
         <script type="text/javascript" src="/js/main.min.js"></script>
 
         <script type="text/x-emblem" id="fix">
         </script>
 
         <script type="text/x-emblem" id="event">
+            div class="row event"
+                div class="small-12 medium-8 medium-offset-2 panel"
+                    p This event was created in FatCal by #{publisher.user.displayName}. Reply by clicking “Going”, “Maybe” or “No” below. That way #{publisher.user.firstname} will know that you if you are going or not. 
+
+                    p Since you do not have FatCal yourself yet, you will have to write the details down yourself but we are working hard to be able to allow more users into FatCal. In the meantime, head over and sign up for a beta account on <a href="http://www.fatcal.com/" targer="_new">www.fatcal.com</a>
+
+
 
             if isNotEditing
                 div class="row event"
@@ -33,17 +40,17 @@
                         | People
                 div class="row event"
                     div class="small-12 medium-9 medium-offset-3 columns avatar-column"
-                        img.avatar src=publisher.user.avatarURL
+                        img.avatar src=publisher.user.avatar
                         = publisher.user.displayName 
                         |&nbsp;(Going)                     
                     each attendees                   
                         div class="small-12 medium-9 medium-offset-3 columns avatar-column"
-                            img.avatar src=calendar.user.avatarURL
+                            img.avatar src=calendar.user.avatar
                             = calendar.user.displayName
                             |&nbsp;(#{hrStatus})
 
                 if isAttendee                
-                    div class="row event"
+                    div class="row event" style="margin-bottom: 30px;"
                         div class="small-12 medium-12 columns end status"
                             = radio-button id="attendingStatus1" name="attendingStatus" selectionBinding="attendingStatusSelected" value="2" 
                             label for="attendingStatus1" Attending
@@ -52,11 +59,23 @@
                             = radio-button id="attendingStatus3" name="attendingStatus" selectionBinding="attendingStatusSelected" value="4" 
                             label for="attendingStatus3" No
 
-
+                div class="row event"
+                    div{bind-attr class=":small-12 :medium-8 :medium-offset-2 :panel :callout showHero:visible:hidden"}
+                        p{bind-attr class="showAttendingHero:visible:hidden"} 
+                            |#{publisher.user.firstname} will be real happy that you have decided to go!
+                        p{bind-attr class="showMaybeHero:visible:hidden"}
+                            |Ok so you haven't decided yet but we both know that 'maybe' is just the polite way of saying that you don't really want to go and is holding out for something better.
+                        p{bind-attr class="showRejectHero:visible:hidden"}
+                            |Not going. #{publisher.user.firstname} will be sad that you're not coming but happy to know at least. That's always something.
                 // div class="row event-controls"
                 //     div class="col-md-4"
                 //         button.btn.btn-default click="edit" Edit
                 //         button.btn.btn-primary click="back" Back
+                div class="row event"
+                    div class="small-12 medium-8 medium-offset-2 panel"
+                        p FatCal is a new tool for organizing your own time and plan events with people you care about. FatCal is developed in Stockholm and we are currently testing it among early adopters around Sweden. 
+
+                        p Read more about us at <a href="http://www.fatcal.com" target="_new">www.fatcal.com</a>
 
             else
                 = partial 'event/edit'

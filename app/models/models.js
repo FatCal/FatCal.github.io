@@ -42,7 +42,10 @@ define
 
 			}.property('firstname','lastname'),
 			avatarURL: function(){
-				return 'http://fatcal.datareklam.se/uploads/'+this.get('avatar');
+				if(this.get('avatar'))
+					this.get('avatar');
+				else
+					return '/img/default_avatar.jpg'
 			}.property('avatar')
 		});
 
