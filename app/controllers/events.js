@@ -35,11 +35,10 @@ define
 				return [d.getHours(),d.getMinutes()]; 
 			}.property('stop_time'),
 			when: function(){
-				var start_date = this.get('model.start_date');
 				var start_time = this.get('model.start_time');
 				var end_time = this.get('model.end_time');
 
-				m = moment(start_date);
+				m = moment(start_time);
 				ts = moment({
 					hour: start_time.getHours(),
 					minutes: start_time.getMinutes()
