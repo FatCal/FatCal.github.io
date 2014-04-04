@@ -13,9 +13,7 @@ define
 
 			title: DS.attr("string"),
 			description: DS.attr("string"),
-			start_date: DS.attr("date"),
 			start_time: DS.attr("date"),
-			end_date: DS.attr("date"),
 			end_time: DS.attr("date"),
 			filter_time: DS.attr("date")
 

@@ -20,16 +20,10 @@ define
 			showAttendingHero: false,
 			showMaybeHero: false,
 			showRejectHero: false,
-			startDate: function(){
-				return moment(this.get('model.start_date')).valueOf();
-			}.property('start_date'),
 			startTime: function(){
 				var d = this.get('model.start_time');
 				return [d.getHours(),d.getMinutes()]; 
 			}.property('start_time'),
-			endDate: function(){
-				return moment(this.get('model.end_date')).valueOf();
-			}.property('end_date'),
 			endTime: function(){
 				var d = this.get('model.end_time');
 				return [d.getHours(),d.getMinutes()]; 
@@ -48,7 +42,7 @@ define
 					minutes: end_time.getMinutes()
 				});
 				return m.format("dddd Do MMMM") + ", " + ts.format("h:mm a")+" - "+te.format("h:mm a");
-			}.property('start_date','start_time','end_time'),
+			}.property('start_time','end_time'),
 			attendee: function(){
 				var attendee = null;
 				var eventId = this.get('model.id');
