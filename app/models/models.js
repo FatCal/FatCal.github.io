@@ -15,7 +15,8 @@ define
 			description: DS.attr("string"),
 			start_time: DS.attr("date"),
 			end_time: DS.attr("date"),
-			filter_time: DS.attr("date")
+			filter_time: DS.attr("date"),
+			tz: DS.attr("string")
 
 //			modules: DS.hasMany('module')
 		});

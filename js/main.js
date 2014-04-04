@@ -16,7 +16,8 @@ require.config({
 		'pickadate-time': 	'components/pickadate/lib/picker.time',
 		'query': 			'components/query/query',
 //		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
-		'ua-parser-js': 	'components/ua-parser-js/src/ua-parser.min'
+		'ua-parser-js': 	'components/ua-parser-js/src/ua-parser.min',
+		'jstz': 			'components/jsTimezoneDetect/jstz'
 	},
 	shim:
 	{
@@ -25,7 +26,7 @@ require.config({
 			deps: ['handlebars','jquery'],
 			exports: 'Ember'
 		},
-		'ember-data' : ['ember'],
+		'ember-data' : ['ember']
 //		'ember-simple-auth' : ['ember']
 	}
 });

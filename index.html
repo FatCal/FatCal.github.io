@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="/css/style.min.css"/>
 
         <!-- JS -->
-        <!--- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script -->
+        <!-- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script-->
         <script type="text/javascript" src="/js/main.min.js"></script>
 
         <script type="text/x-emblem" id="fix">
@@ -23,15 +23,13 @@
 
                     p Since you do not have FatCal yourself yet, you will have to write the details down yourself but we are working hard to be able to allow more users into FatCal. In the meantime, head over and sign up for a beta account on <a href="http://www.fatcal.com/" targer="_new">www.fatcal.com</a>
 
-
-
             if isNotEditing
                 div class="row event"
                     div class="small-12 columns title"
                         == title
                 div class="row event"
                     div class="small-12 columns time"
-                        == when
+                        = when
                 div class="row event"
                     div class="small-12 columns description"
                         = description
@@ -48,7 +46,6 @@
                             img.avatar src=calendar.user.avatar
                             = calendar.user.displayName
                             |&nbsp;(#{hrStatus})
-
                 if isAttendee                
                     div class="row event" style="margin-bottom: 30px;"
                         div class="small-12 medium-12 columns end status"

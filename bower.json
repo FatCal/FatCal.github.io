@@ -17,7 +17,9 @@
     "foundation" : "latest",
     "query" : "latest",
     "ember-simple-auth": "https://github.com/simplabs/ember-simple-auth-component.git",
-    "ua-parser-js" : "latest"
+    "ua-parser-js" : "latest",
+    "jsTimezoneDetect" : "latest"
+
   },
   "devDependencies": {
     "ember-mocha-adapter": "0.1.2"

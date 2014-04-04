@@ -3,9 +3,11 @@ define
 	[
 		'app/app',
 		'ember',
-		'moment'
-	],function(App,ember,moment)
+		'moment',
+		'jstz'
+	],function(App,ember,moment,jstz)
 	{
+		console.log("jstz: "+jstz);
 		App.EventsController = Ember.ArrayController.extend
 		({
 
@@ -31,7 +33,6 @@ define
 			when: function(){
 				var start_time = this.get('model.start_time');
 				var end_time = this.get('model.end_time');
-
 				m = moment(start_time);
 				ts = moment({
 					hour: start_time.getHours(),
@@ -42,7 +43,7 @@ define
 					minutes: end_time.getMinutes()
 				});
 				return m.format("dddd Do MMMM") + ", " + ts.format("h:mm a")+" - "+te.format("h:mm a");
-			}.property('start_time','end_time'),
+			}.property('model.start_time','model.end_time'),
 			attendee: function(){
 				var attendee = null;
 				var eventId = this.get('model.id');
@@ -94,6 +95,12 @@ define
 					console.log('attendingstatus updated to '+this.get('attendingStatusSelected'));
 				}
 			}.observes('model'),
+			tz : function()
+			{
+//				var tz = jstz.determine;
+//				return tz.name();
+				return this.get('model.tz');
+			}.property('model.tz'),
 			actions: {
 				edit: function()
 				{
