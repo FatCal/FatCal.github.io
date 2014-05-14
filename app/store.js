@@ -9,7 +9,12 @@ define
 		App.Adapter = DS.ActiveModelAdapter.reopen({
 				host: 'http://fatcal.datareklam.se',
 				namespace: 'api/v1',
-				headers: {}
+				headers: {},
+				pathForType: function(type){
+					if(type == 'apps')
+						return 'applications';
+					return this._super(type);
+				}
 			});
 
 		App.Store = DS.Store.extend({
@@ -53,6 +58,12 @@ define
 					var application = payload.application;
 					payload = {calendar: payload, user: user} //, application: application};
 				}
+				else if("application" == rootType)
+				{
+				//	var users = payload.users;
+					var calendar = payload.calendar
+					payload = {application: payload, calendar: calendar}
+				}
 				else
 				{
 					// always wrap the payload
@@ -88,6 +99,11 @@ define
 						prop.user = prop.user.id;
 					if(prop.application)
 						prop.application = prop.application.id;
+				}
+				else if("App.Application" == type)
+				{
+					if(prop.calendar)
+						prop.calendar = prop.calendar.id
 				}
 				return this._super(type,prop,hash);
 			},

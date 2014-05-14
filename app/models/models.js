@@ -65,6 +65,12 @@ define
 			}.property('status')
 		});
 
+		App.Application = DS.Model.extend({
+			//users: DS.hasMany("user"),
+			calendar: DS.belongsTo("calendar"),
+			name: DS.attr('string')
+		});
+
 
 /*
 		App.Module = DS.Model.extend({

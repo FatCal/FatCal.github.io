@@ -15,9 +15,12 @@ require.config({
 		'pickadate-date':	'components/pickadate/lib/picker.date',
 		'pickadate-time': 	'components/pickadate/lib/picker.time',
 		'query': 			'components/query/query',
-//		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
+		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
 		'ua-parser-js': 	'components/ua-parser-js/src/ua-parser.min',
-		'jstz': 			'components/jsTimezoneDetect/jstz'
+		'jstz': 			'components/jsTimezoneDetect/jstz',
+		'facebook': 		'//connect.facebook.net/en_US/all',
+		'fatcal-auth':		'js/lib/auth/fatcal',
+		'foundation': 		'components/foundation/js/foundation.min'
 	},
 	shim:
 	{
@@ -26,8 +29,16 @@ require.config({
 			deps: ['handlebars','jquery'],
 			exports: 'Ember'
 		},
-		'ember-data' : ['ember']
-//		'ember-simple-auth' : ['ember']
+		'ember-data' : ['ember'],
+		'ember-simple-auth' : ['ember'],
+		'facebook' : {
+			exports: 'FB'
+		},
+		'fatcal-auth': {
+			deps: ['ember','ember-simple-auth'],
+			exports: 'FatCalAuthenticator'
+		},
+		'foundation' : ['jquery']
 	}
 });
 
@@ -44,10 +55,17 @@ requirejs.onError = function (err)
 require(
 	[
 		'ua-parser-js',
+		'ember-simple-auth',
+		'js/lib/facebook/fb',
+		'foundation',
+		'fatcal-auth',
 
 		// controllers
 		'app/controllers/events',
 		'app/controllers/users',
+		'app/controllers/dashboard',
+		'app/controllers/application',
+		'app/controllers/apps',
 
 		// model
 		'app/models/models',
@@ -58,6 +76,8 @@ require(
 		'app/routes/index_route',
 		'app/routes/events',
 		'app/routes/users',
+		'app/routes/dashboard',
+		'app/routes/apps',
 
 		'app/router',
 

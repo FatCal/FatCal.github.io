@@ -8,9 +8,9 @@ define('app/app',
 		'pickadate-date',
 		'pickadate-time',
 		'query',
-//		'ember-simple-auth'
+		'ember-simple-auth',
+		'fatcal-auth'
 	],function(){
-
 		// var QueryParamAuthenticator = Ember.SimpleAuth.Authenticators.OAuth2.extend({
 		// 	authenticate: function(credentials)
 		// 	{
@@ -45,37 +45,45 @@ define('app/app',
 
 //		App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin);
 
-		// App.initializer({
-		//   name: 'authentication',
-		//   initialize: function(container, application) {
-		//   	container.register("app:authenticators:queryParam",QueryParamAuthenticator)
-		//     Ember.SimpleAuth.setup(container, application);
-		//   }
-		// });
+		App.initializer({
+		  name: 'authentication',
+		  initialize: function(container, application) {
+			// setup simple auth
+			container.register('authenticator:fatcal',FatCalAuthenticator);
+			Ember.SimpleAuth.setup(container,application,{
+				storeFactory: 'ember-simple-auth-session-store:local-storage',
+				authenticationRoute: 'index',
+				routeAfterAuthentication: 'dashboard'
+//				authorizerFactory: 'ember-simple-auth-authorizer:oauth2-'
+			});
+		  }
+		});
 
 		App.initializer({
 			name: "loadCurrentUser",
 //			after: "authentication",
 			initialize: function(container,application) {
-				App.deferReadiness();
-				console.log("App");
+				console.log("App.initialize");
+
+				// check for tokens (FIXME: replace this)
 				query.parse(window.location.href);
 				store = container.lookup("store:main");
 
 				if(query.get("token"))
 				{
+					App.deferReadiness();
 					DS.ActiveModelAdapter.reopen({
 									headers: 
 									{
 										"Authorization": "Oauth " + query.get("token")
 									}
 								});					
+		
+					store.find("user","me").then(function(user){
+						App.me = user;
+						App.advanceReadiness();
+					});
 				}
-
-				store.find("user","me").then(function(user){
-					App.me = user;
-					App.advanceReadiness();
-				});
 			}
 
 		 })

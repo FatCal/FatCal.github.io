@@ -1,3 +1,5 @@
+source 'https://rubygems.org'
+
 gem 'bower'
 gem 'sass'
 gem 'bourbon'

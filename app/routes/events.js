@@ -5,20 +5,21 @@ define
 	],
 	function(App)
 	{
-		console.log("Events");
+		console.log("Configuring Event routes");
 		App.EventsRoute = Ember.Route.extend
 		({
-			/*
+			
 			setupController: function(controller){
 				console.log("setting up controller: "+controller);
 //				controller.set('model',events.findAll('event'));
 			},
-			*/
+			/*
 			model: function()
 			{
 				return this.store.find('event');
 				//return this.get('store').findAll('Event');
 			}
+			*/
 
 		});
 

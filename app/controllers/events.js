@@ -10,7 +10,6 @@ define
 		console.log("jstz: "+jstz);
 		App.EventsController = Ember.ArrayController.extend
 		({
-
 		});
 
 		App.EventController = Ember.ObjectController.extend(

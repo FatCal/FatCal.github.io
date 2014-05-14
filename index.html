@@ -7,11 +7,11 @@
         <meta name="viewport" content="width=device-width">
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/style.min.css"/>
+        <link rel="stylesheet" href="/css/style.css"/>
 
         <!-- JS -->
-        <!-- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script-->
-        <script type="text/javascript" src="/js/main.min.js"></script>
+        <script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script>
+        <!-- script type="text/javascript" src="/js/main.min.js"></script -->
 
         <script type="text/x-emblem" id="fix">
         </script>
@@ -111,6 +111,7 @@
 
         <script type="text/x-emblem" id="events">
             div class="row"
+                p hello mister event
                 div class="col-md-4"
                     table class='table'
                         thead
@@ -125,11 +126,53 @@
             div class="row"
                 div class="col-md-4"
                     = outlet
-        </script>   
+        </script>  
+
+        <script type="text/x-emblem" id="index">
+            p Welcome to Raft
+
+        </script> 
+
+        <script type="text/x-emblem" id="dashboard">
+            p Im dashing!
+        </script>
+
+        <script type="text/x-emblem" id="application">
+            nav.top-bar data-topbar=""
+                ul.title-area
+                    li.name
+                        h1 
+                            link-to 'index' | Raft
+                section.top-bar-section
+                    ul.right
+                        if session.isAuthenticated
+                            li
+                                link-to 'events' | Events
+                            li
+                                link-to 'applications' | Apps
+                            li
+                                link-to 'dashboard' | Dashboard
+                            li.has-dropdown.not-click
+                                a href="#"
+                                    img.avatar-small src=App.me.avatar
+                                    |#{App.me.firstname} #{App.me.lastname}
+                                ul.dropdown
+                                    li
+                                        a click="logout" Logout 
+                        else
+                            li.active
+                                a click="login" Login 
+ 
+            div {{outlet}}
+        </script>
+
+        <script type="text/x-emblem" id="apps">
+            p Apps
+        </script>
 
     </head>
-    <body>
-          <section id="ember"></section>
-
+    <body> 
+        <section id="ember"></section>
+        <div id="fb-root"></div>
     </body>
 </html>

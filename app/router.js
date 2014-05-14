@@ -16,9 +16,12 @@ define
 		(
 			function () 
 			{
-				console.log("mapping routes");
-				this.route("events",{path: "/"});
+				this.route("events",{path: "/events"});
 				this.resource("event", {path: '/event/:event_id'});
+
+				this.route("applications",{path: "/apps"});
+
+				this.route("dashboard",{path: "/dashboard"});
 
 				/*
 				this.resource("users",function(){
