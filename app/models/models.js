@@ -2,10 +2,11 @@ define
 (
 	[
 		'app/app',
+		'moment',
 		'ember',
 		'ember-data'
 	],
-	function(App)
+	function(App,moment)
 	{
 		App.Event = DS.Model.extend({
 			publisher: DS.belongsTo('calendar'),
@@ -13,10 +14,18 @@ define
 
 			title: DS.attr("string"),
 			description: DS.attr("string"),
-			start_time: DS.attr("date"),
-			end_time: DS.attr("date"),
-			filter_time: DS.attr("date"),
-			tz: DS.attr("string")
+			start_time: DS.attr("ISO8601"),
+			end_time: DS.attr("ISO8601"),
+			filter_time: DS.attr("ISO8601"),
+			tz: DS.attr("string"),
+
+			when: function(){
+				var start_time = this.get('start_time');
+				var end_time = this.get('end_time');
+				ts = moment(start_time);
+				te = moment(end_time);
+				return ts.format("dddd Do MMMM") + ", " + ts.format("h:mm a")+" - "+te.format("h:mm a");
+			}.property('start_time','end_time')
 
 //			modules: DS.hasMany('module')
 		});
@@ -65,10 +74,11 @@ define
 			}.property('status')
 		});
 
-		App.Application = DS.Model.extend({
+		App.App = DS.Model.extend({
 			//users: DS.hasMany("user"),
 			calendar: DS.belongsTo("calendar"),
-			name: DS.attr('string')
+			name: DS.attr(),
+			logo: DS.attr()
 		});
 
 

@@ -6,13 +6,12 @@ define
 	function(App)
 	{
 		console.log("Configuring Event routes");
-		App.EventsRoute = Ember.Route.extend
-		({
+		App.EventsRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
 			
 			setupController: function(controller){
 				console.log("setting up controller: "+controller);
-//				controller.set('model',events.findAll('event'));
-			},
+				controller.set('model',this.store.findAll('event'));
+			}
 			/*
 			model: function()
 			{
@@ -23,10 +22,33 @@ define
 
 		});
 
-		App.EventRoute = Ember.Route.extend({
+		App.ExternalRoute = Ember.Route.extend({
+			// setupController: function(controller,event_id)
+			// {
+				
+			// 	console.log("Ext event");
+			// 	console.log(event_id);
+			// 	controller.set('model',this.store.find('event',event_id));
+			// 	//this.controllerFor('event').set('model',event);
+			// }
+			model: function(params){
+				console.log(params.id);
+				return this.store.find('event',params.id);
+			}
+		});
+
+		App.EventEditRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
 			setupController: function(controller,event)
 			{
-				console.log("event: "+event.get('title'));
+				console.log("editing route");
+				controller.set('model',event);
+			}
+		});
+
+		App.EventRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
+			setupController: function(controller,event)
+			{
+				console.log("event route: "+event.get('title'));
 				controller.set('model',event);
 			}
 			/*,

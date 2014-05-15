@@ -4,16 +4,24 @@ define
 		'app/app',
 		'ember',
 		'moment',
-		'jstz'
+		'jstz',
+		'ember-simple-auth'
 	],function(App,ember,moment,jstz)
 	{
-		console.log("jstz: "+jstz);
+
 		App.EventsController = Ember.ArrayController.extend
 		({
 		});
 
-		App.EventController = Ember.ObjectController.extend(
-		{
+		App.EventEditController = Ember.ObjectController.extend({
+			actions:{
+				save: function(){
+					this.get('model').save();
+				}
+			}
+		});
+
+		App.ExternalController = Ember.ObjectController.extend({
 			isAttendee: false,
 			isNotEditing: true,
 			attendingStatusSelected: 0,
@@ -29,20 +37,6 @@ define
 				var d = this.get('model.end_time');
 				return [d.getHours(),d.getMinutes()]; 
 			}.property('stop_time'),
-			when: function(){
-				var start_time = this.get('model.start_time');
-				var end_time = this.get('model.end_time');
-				m = moment(start_time);
-				ts = moment({
-					hour: start_time.getHours(),
-					minutes: start_time.getMinutes()
-				});
-				te = moment({
-					hour: end_time.getHours(),
-					minutes: end_time.getMinutes()
-				});
-				return m.format("dddd Do MMMM") + ", " + ts.format("h:mm a")+" - "+te.format("h:mm a");
-			}.property('model.start_time','model.end_time'),
 			attendee: function(){
 				var attendee = null;
 				var eventId = this.get('model.id');

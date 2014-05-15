@@ -17,11 +17,15 @@ define
 			function () 
 			{
 				this.route("events",{path: "/events"});
-				this.resource("event", {path: '/event/:event_id'});
+				this.route("event",{path: '/event/:event_id'});
+				this.route("event.edit",{path: 'event/:event_id/edit'});
+				this.route("external",{path: 'external/:id'});
 
-				this.route("applications",{path: "/apps"});
+				this.route("apps",{path: "/apps"});
+				this.resource("app",{path: '/app/:app_id'});
 
 				this.route("dashboard",{path: "/dashboard"});
+
 
 				/*
 				this.resource("users",function(){

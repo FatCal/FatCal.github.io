@@ -9,29 +9,9 @@ define('app/app',
 		'pickadate-time',
 		'query',
 		'ember-simple-auth',
-		'fatcal-auth'
+		'fatcal-auth',
+		'token-auth'
 	],function(){
-		// var QueryParamAuthenticator = Ember.SimpleAuth.Authenticators.OAuth2.extend({
-		// 	authenticate: function(credentials)
-		// 	{
-		// 		console.log("AUTHENTICATING!");
-		// 		var _this = this;
-		// 		return new Ember.RSVP.Promise(function(resolve,reject){
-					
-		// 			if(credentials.access_token)
-		// 			{
-		// 				result = {
-		// 					"access_token" : credentials.access_token,
-		// 					"token_type" : "bearer"
-		// 				}
-		// 				resolve(result);
-		// 			}
-		// 			else
-		// 				reject("No access token provided in credentials");
-
-		// 		});
-		// 	}
-		// });
 
 		console.log("app/app");
 		var App = window.App = Ember.Application.create({
@@ -43,13 +23,13 @@ define('app/app',
 			}
 		});
 
-//		App.ApplicationRoute = Ember.Route.extend(Ember.SimpleAuth.ApplicationRouteMixin);
-
 		App.initializer({
 		  name: 'authentication',
 		  initialize: function(container, application) {
 			// setup simple auth
+			console.log("auth init");
 			container.register('authenticator:fatcal',FatCalAuthenticator);
+			container.register('authenticator:token',TokenAuthenticator);
 			Ember.SimpleAuth.setup(container,application,{
 				storeFactory: 'ember-simple-auth-session-store:local-storage',
 				authenticationRoute: 'index',
@@ -61,7 +41,7 @@ define('app/app',
 
 		App.initializer({
 			name: "loadCurrentUser",
-//			after: "authentication",
+			after: "authentication",
 			initialize: function(container,application) {
 				console.log("App.initialize");
 
@@ -70,8 +50,12 @@ define('app/app',
 				store = container.lookup("store:main");
 
 				if(query.get("token"))
-				{
+				{	
+					var token = query.get("token")
 					App.deferReadiness();
+					var controller = App.__container__.lookup('controller:application');
+					controller.get('session').authenticate('authenticator:token',token);
+
 					DS.ActiveModelAdapter.reopen({
 									headers: 
 									{
@@ -83,10 +67,11 @@ define('app/app',
 						App.me = user;
 						App.advanceReadiness();
 					});
+
 				}
 			}
 
-		 })
+		 });
 
 
 

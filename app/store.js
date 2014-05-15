@@ -11,7 +11,7 @@ define
 				namespace: 'api/v1',
 				headers: {},
 				pathForType: function(type){
-					if(type == 'apps')
+					if(type == 'app')
 						return 'applications';
 					return this._super(type);
 				}
@@ -58,11 +58,11 @@ define
 					var application = payload.application;
 					payload = {calendar: payload, user: user} //, application: application};
 				}
-				else if("application" == rootType)
+				else if("app" == rootType)
 				{
 				//	var users = payload.users;
 					var calendar = payload.calendar
-					payload = {application: payload, calendar: calendar}
+					payload = {app: payload, calendar: calendar}
 				}
 				else
 				{
@@ -100,7 +100,7 @@ define
 					if(prop.application)
 						prop.application = prop.application.id;
 				}
-				else if("App.Application" == type)
+				else if("App.App" == type)
 				{
 					if(prop.calendar)
 						prop.calendar = prop.calendar.id

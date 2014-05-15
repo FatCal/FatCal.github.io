@@ -73,3 +73,6 @@ nav {
     display: block; }
   .event .hidden {
     display: none; }
+
+.editEvent textarea {
+  height: 10em; }

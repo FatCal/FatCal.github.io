@@ -20,6 +20,7 @@ require.config({
 		'jstz': 			'components/jsTimezoneDetect/jstz',
 		'facebook': 		'//connect.facebook.net/en_US/all',
 		'fatcal-auth':		'js/lib/auth/fatcal',
+		'token-auth': 		'js/lib/auth/token',
 		'foundation': 		'components/foundation/js/foundation.min'
 	},
 	shim:
@@ -37,6 +38,10 @@ require.config({
 		'fatcal-auth': {
 			deps: ['ember','ember-simple-auth'],
 			exports: 'FatCalAuthenticator'
+		},
+		'token-auth': {
+			deps: ['ember','ember-simple-auth'],
+			exports: 'TokenAuthenticator'
 		},
 		'foundation' : ['jquery']
 	}
@@ -59,6 +64,10 @@ require(
 		'js/lib/facebook/fb',
 		'foundation',
 		'fatcal-auth',
+		'token-auth',
+
+		// helpers
+		'app/helpers/transforms',
 
 		// controllers
 		'app/controllers/events',
@@ -86,7 +95,7 @@ require(
 		'app/components/pick-a-date',
 		'app/components/pick-a-time',
 
-		// templates
+		// app
 		'app/app'
 
 	], function(){
