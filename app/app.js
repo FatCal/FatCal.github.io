@@ -8,7 +8,7 @@ define('app/app',
 		'pickadate-date',
 		'pickadate-time',
 		'query',
-		'ember-simple-auth',
+		'components/ember-simple-auth/ember-simple-auth',
 		'fatcal-auth',
 		'token-auth'
 	],function(){

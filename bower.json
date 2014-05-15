@@ -6,7 +6,7 @@
 
     "ember": "1.3.2",
     "ember-data-shim": "1.0.0-beta.7",
-    "ember-simple-auth": "https://github.com/simplabs/ember-simple-auth-component.git",
+    "ember-simple-auth": "*",
     "emblem.js": "latest",
 
     "bootstrap-sass": "~3.0.0",

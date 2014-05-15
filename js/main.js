@@ -15,7 +15,7 @@ require.config({
 		'pickadate-date':	'components/pickadate/lib/picker.date',
 		'pickadate-time': 	'components/pickadate/lib/picker.time',
 		'query': 			'components/query/query',
-		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
+//		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
 		'ua-parser-js': 	'components/ua-parser-js/src/ua-parser.min',
 		'jstz': 			'components/jsTimezoneDetect/jstz',
 		'facebook': 		'//connect.facebook.net/en_US/all',
@@ -31,16 +31,18 @@ require.config({
 			exports: 'Ember'
 		},
 		'ember-data' : ['ember'],
-		'ember-simple-auth' : ['ember'],
+		'components/ember-simple-auth/ember-simple-auth' : {
+			deps: ['ember']
+		},
 		'facebook' : {
 			exports: 'FB'
 		},
 		'fatcal-auth': {
-			deps: ['ember','ember-simple-auth'],
+			deps: ['ember','components/ember-simple-auth/ember-simple-auth'],
 			exports: 'FatCalAuthenticator'
 		},
 		'token-auth': {
-			deps: ['ember','ember-simple-auth'],
+			deps: ['ember','components/ember-simple-auth/ember-simple-auth'],
 			exports: 'TokenAuthenticator'
 		},
 		'foundation' : ['jquery']
@@ -60,7 +62,7 @@ requirejs.onError = function (err)
 require(
 	[
 		'ua-parser-js',
-		'ember-simple-auth',
+		'components/ember-simple-auth/ember-simple-auth',
 		'js/lib/facebook/fb',
 		'foundation',
 		'fatcal-auth',

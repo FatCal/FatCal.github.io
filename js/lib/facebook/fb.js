@@ -1,4 +1,4 @@
-define(['facebook','fatcal-auth','ember','ember-simple-auth'], function(){
+define(['facebook','ember'], function(){
   FB.init({
     appId      : '406893086091235'
   });

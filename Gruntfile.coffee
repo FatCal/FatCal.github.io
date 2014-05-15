@@ -27,6 +27,7 @@ module.exports = (grunt) ->
 						mainConfigFile: "js/main.js"
 						name: "js/main"
 						include: ['requireLib']
+						exclude: ['facebook']
 						out: "js/main.min.js"
 				'compile-css':
 					options:

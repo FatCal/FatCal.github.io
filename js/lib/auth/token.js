@@ -1,4 +1,4 @@
-define(['app/app'],function(App){
+define(['app/app','components/ember-simple-auth/ember-simple-auth'],function(App){
 
 	TokenAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({
 		authenticate: function(options){

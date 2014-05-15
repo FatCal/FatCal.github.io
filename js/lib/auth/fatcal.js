@@ -1,4 +1,4 @@
-define(['jquery','ember'],function(){
+define(['jquery','ember','components/ember-simple-auth/ember-simple-auth'],function(){
 	
 	FatCalAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({ 
 		authenticate : function(options){
