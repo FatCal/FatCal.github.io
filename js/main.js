@@ -17,7 +17,7 @@ require.config({
 		'query': 			'components/query/query',
 //		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth-0.4.0.amd.min',
 //		'ember-simple-auth': 'components/ember-simple-auth/wrapper',
-		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
+		'ember-simple-auth': 'js/lib/ember-simple-auth/ember-simple-auth',
 		'ua-parser-js': 	'components/ua-parser-js/src/ua-parser.min',
 		'jstz': 			'components/jsTimezoneDetect/jstz',
 		'facebook': 		'//connect.facebook.net/en_US/all',
