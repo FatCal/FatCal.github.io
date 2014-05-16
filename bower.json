@@ -6,8 +6,8 @@
 
     "ember": "1.3.2",
     "ember-data-shim": "1.0.0-beta.7",
-    "ember-simple-auth": "*",
     "emblem.js": "latest",
+    "ember-simple-auth": "latest",
 
     "bootstrap-sass": "~3.0.0",
     "bourbon": "latest",

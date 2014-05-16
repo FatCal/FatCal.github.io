@@ -1,4 +1,4 @@
-define(['jquery','ember','components/ember-simple-auth/ember-simple-auth'],function(){
+define(['jquery','ember','ember-simple-auth'],function(){
 	
 	FatCalAuthenticator = Ember.SimpleAuth.Authenticators.Base.extend({ 
 		authenticate : function(options){
@@ -14,6 +14,8 @@ define(['jquery','ember','components/ember-simple-auth/ember-simple-auth'],funct
 					.done(function(data){
 						console.log("Success: "+data.data.access_token);
 						console.log(data);
+						controller = App.__container__.lookup("controller:application");
+						controller.set('session.access_token',data.data.access_token);
 						DS.ActiveModelAdapter.reopen({
 							headers: 
 							{
@@ -46,6 +48,19 @@ define(['jquery','ember','components/ember-simple-auth/ember-simple-auth'],funct
 				FB.logout();
 				resolve();
 			});
+		}
+	});
+
+	FatCalAuthorizer = Ember.SimpleAuth.Authorizers.Base.extend({
+		authorize: function(jqXHR, requestOptions){
+		var accessToken = this.get('session.access_token');
+		console.log("authorizing: "+accessToken);
+		if (this.get('session.isAuthenticated') && !Ember.isEmpty(accessToken)) {
+			if (!Ember.SimpleAuth.Utils.isSecureUrl(requestOptions.url)) {
+				Ember.Logger.warn('Credentials are transmitted via an insecure connection - use HTTPS to keep them secure.');
+				}
+				jqXHR.setRequestHeader('Authorization', 'Oauth ' + accessToken);
+			}
 		}
 	});
 });

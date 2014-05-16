@@ -1,8 +1,9 @@
 require.config({
 	baseUrl: '/',
+//	urlArgs: "bust=" + (new Date()).getTime(),
 	paths:
 	{
-		'jquery': 			'components/jQuery/jquery',
+		'jquery': 			'components/jquery/jquery',
 		'handlebars': 		'components/handlebars/handlebars',
 		'emblem':			'components/emblem.js/emblem',
 		'ember': 			'components/ember/ember',
@@ -10,18 +11,25 @@ require.config({
 		'bootstrap': 		'components/bootstrap-sass/dist/js/bootstrap',
 		'text': 			'components/requirejs-text/text',
 		'moment': 			'components/momentjs/moment',
-//		'jqueryui': 		'components/jquery-ui-amd/jquery-ui-1.10.0/jqueryui',
 		'pickadate': 		'components/pickadate/lib/picker',
 		'pickadate-date':	'components/pickadate/lib/picker.date',
 		'pickadate-time': 	'components/pickadate/lib/picker.time',
 		'query': 			'components/query/query',
-//		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
+//		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth-0.4.0.amd.min',
+//		'ember-simple-auth': 'components/ember-simple-auth/wrapper',
+		'ember-simple-auth': 'components/ember-simple-auth/ember-simple-auth',
 		'ua-parser-js': 	'components/ua-parser-js/src/ua-parser.min',
 		'jstz': 			'components/jsTimezoneDetect/jstz',
 		'facebook': 		'//connect.facebook.net/en_US/all',
 		'fatcal-auth':		'js/lib/auth/fatcal',
 		'token-auth': 		'js/lib/auth/token',
-		'foundation': 		'components/foundation/js/foundation.min'
+		'foundation': 		'components/foundation/js/foundation.min',
+
+	},
+	deps: ['ember'],
+	bundles:
+	{
+		'ember-simple-auth': ['ember-simple-auth/core','ember-simple-auth/session','ember-simple-auth/authenticators','ember-simple-auth/authorizers','ember-simple-auth/stores','ember-simple-auth/utils','ember-simple-auth/mixins/application_route_mixin','ember-simple-auth/mixins/authenticated_route_mixin','ember-simple-auth/mixins/authentication_route_mixin','ember-simple-auth/mixins/authentication_controller_mixin','ember-simple-auth/mixins/login_controller_mixin','ember-simple-auth/authenticators/base','ember-simple-auth/authorizers/base','ember-simple-auth/stores/base','ember-simple-auth/stores/local_storage','ember-simple-auth/stores/ephemeral','ember-simple-auth/utils/flat_objects_are_equal','ember-simple-auth/utils/is_secure_url']
 	},
 	shim:
 	{
@@ -31,19 +39,12 @@ require.config({
 			exports: 'Ember'
 		},
 		'ember-data' : ['ember'],
-		'components/ember-simple-auth/ember-simple-auth' : {
+		'ember-simple-auth' : {
 			deps: ['ember']
 		},
 		'facebook' : {
+			deps: ['jquery'],
 			exports: 'FB'
-		},
-		'fatcal-auth': {
-			deps: ['ember','components/ember-simple-auth/ember-simple-auth'],
-			exports: 'FatCalAuthenticator'
-		},
-		'token-auth': {
-			deps: ['ember','components/ember-simple-auth/ember-simple-auth'],
-			exports: 'TokenAuthenticator'
 		},
 		'foundation' : ['jquery']
 	}
@@ -61,8 +62,9 @@ requirejs.onError = function (err)
 
 require(
 	[
+		'ember',
+		'ember-simple-auth',
 		'ua-parser-js',
-		'components/ember-simple-auth/ember-simple-auth',
 		'js/lib/facebook/fb',
 		'foundation',
 		'fatcal-auth',

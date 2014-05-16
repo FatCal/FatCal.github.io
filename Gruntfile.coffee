@@ -24,11 +24,16 @@ module.exports = (grunt) ->
 						baseUrl: "."
 						paths:
 							requireLib: 'components/requirejs/require'
+						#	'ember-simple-auth': 'empty:'
 						mainConfigFile: "js/main.js"
 						name: "js/main"
 						include: ['requireLib']
-						exclude: ['facebook']
+						#exclude: ['facebook']
 						out: "js/main.min.js"
+						# dir: "public-build"
+						# module:[
+						# 	{name: "js/main"}
+						# ]
 				'compile-css':
 					options:
 						cssIn: "css/style.css"

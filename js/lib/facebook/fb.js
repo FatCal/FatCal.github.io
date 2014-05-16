@@ -1,4 +1,4 @@
-define(['facebook','ember'], function(){
+define(['facebook','ember','ember-simple-auth'], function(){
   FB.init({
     appId      : '406893086091235'
   });
@@ -9,7 +9,7 @@ define(['facebook','ember'], function(){
   FB.Event.subscribe('auth.statusChange',function(response){
   	console.log("auth_status_change_callback: " + response.status);
  	// fetch the indexController (any controller would do)
-  	var indexController = App.__container__.lookup('controller:index');
+  	var indexController = App.__container__.lookup('controller:application');
   	console.log(indexController);
   	if(response.status == 'connected')
 	  	indexController.get('session').authenticate('authenticator:fatcal',response.authResponse);

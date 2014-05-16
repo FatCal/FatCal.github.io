@@ -8,11 +8,12 @@ define('app/app',
 		'pickadate-date',
 		'pickadate-time',
 		'query',
-		'components/ember-simple-auth/ember-simple-auth',
+		'ember-simple-auth',
 		'fatcal-auth',
 		'token-auth'
 	],function(){
-
+		Ember.onLoad('application', Emblem.compileScriptTags);
+		
 		console.log("app/app");
 		var App = window.App = Ember.Application.create({
 			VERSION: '1.0',
@@ -30,11 +31,12 @@ define('app/app',
 			console.log("auth init");
 			container.register('authenticator:fatcal',FatCalAuthenticator);
 			container.register('authenticator:token',TokenAuthenticator);
+			container.register('authorizer:fatcal',FatCalAuthorizer);
 			Ember.SimpleAuth.setup(container,application,{
 				storeFactory: 'ember-simple-auth-session-store:local-storage',
 				authenticationRoute: 'index',
-				routeAfterAuthentication: 'dashboard'
-//				authorizerFactory: 'ember-simple-auth-authorizer:oauth2-'
+				routeAfterAuthentication: 'dashboard',
+				authorizerFactory: 'authorizer:fatcal'
 			});
 		  }
 		});
@@ -71,9 +73,8 @@ define('app/app',
 				}
 			}
 
+
 		 });
-
-
 
 		return App;
 	}

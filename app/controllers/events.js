@@ -5,7 +5,7 @@ define
 		'ember',
 		'moment',
 		'jstz',
-		'components/ember-simple-auth/ember-simple-auth'
+		'ember-simple-auth'
 	],function(App,ember,moment,jstz)
 	{
 

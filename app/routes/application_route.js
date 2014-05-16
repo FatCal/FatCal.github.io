@@ -3,7 +3,7 @@ define
 	[
 		'app/app',
 		'ember',
-		'components/ember-simple-auth/ember-simple-auth'
+		'ember-simple-auth'
 	],
 	function(App)
 	{
