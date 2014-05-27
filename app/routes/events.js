@@ -1,9 +1,4 @@
-define
-(
-	[
-		'app/app'
-	],
-	function(App)
+define(['app/app','query'],function(App)
 	{
 		console.log("Configuring Event routes");
 		App.EventsRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
@@ -31,6 +26,35 @@ define
 			// 	controller.set('model',this.store.find('event',event_id));
 			// 	//this.controllerFor('event').set('model',event);
 			// }
+			beforeModel: function(transition)
+			{
+				// just authenticate this single event
+				query.parse(window.location.href);
+				if(query.get("token"))
+				{
+					return new Ember.RSVP.Promise(function(resolve,reject){		
+						DS.ActiveModelAdapter.reopen({
+										headers: 
+										{
+											"Authorization": "Oauth " + query.get("token")
+										}
+									});				
+						debugger;
+						var store = App.__container__.lookup("store:main");
+						store.find("user","me").then(function(user){
+							if(user != null)
+							{
+								App.me = user;
+								resolve();
+							}
+							else
+								reject();
+						});
+					});
+				}
+				else 
+					this.transitionTo('index');
+			},
 			model: function(params){
 				console.log(params.id);
 				return this.store.find('event',params.id);

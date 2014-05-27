@@ -12,8 +12,9 @@ define('app/app',
 		'fatcal-auth',
 		'token-auth'
 	],function(){
+		// compile emblem (needed for production for some reason	)
 		Ember.onLoad('application', Emblem.compileScriptTags);
-		
+
 		console.log("app/app");
 		var App = window.App = Ember.Application.create({
 			VERSION: '1.0',
@@ -30,12 +31,12 @@ define('app/app',
 			// setup simple auth
 			console.log("auth init");
 			container.register('authenticator:fatcal',FatCalAuthenticator);
-			container.register('authenticator:token',TokenAuthenticator);
+//			container.register('authenticator:token',TokenAuthenticator);
 			container.register('authorizer:fatcal',FatCalAuthorizer);
 			Ember.SimpleAuth.setup(container,application,{
 				storeFactory: 'ember-simple-auth-session-store:local-storage',
 				authenticationRoute: 'index',
-				routeAfterAuthentication: 'dashboard',
+	//			routeAfterAuthentication: 'dashboard',
 				authorizerFactory: 'authorizer:fatcal'
 			});
 		  }
@@ -47,34 +48,33 @@ define('app/app',
 			initialize: function(container,application) {
 				console.log("App.initialize");
 
-				// check for tokens (FIXME: replace this)
-				query.parse(window.location.href);
-				store = container.lookup("store:main");
-
-				if(query.get("token"))
-				{	
-					var token = query.get("token")
-					App.deferReadiness();
-					var controller = App.__container__.lookup('controller:application');
-					controller.get('session').authenticate('authenticator:token',token);
-
-					DS.ActiveModelAdapter.reopen({
-									headers: 
-									{
-										"Authorization": "Oauth " + query.get("token")
-									}
-								});					
-		
-					store.find("user","me").then(function(user){
-						App.me = user;
-						App.advanceReadiness();
-					});
-
-				}
+				// // check for tokens (FIXME: replace this)
+				// query.parse(window.location.href);
+				// store = container.lookup("store:main");
+				// if(query.get("token"))
+				// {	
+				// 	var token = query.get("token")
+				// 	//App.deferReadiness();
+				// 	var controller = App.__container__.lookup('controller:application');
+				// 	controller.get('session').authenticate('authenticator:token',token);
+				// }
 			}
 
 
 		 });
+
+		App.ready = function(){
+				// // check for tokens (FIXME: replace this)
+				console.log("appl loaded");
+				// query.parse(window.location.href);
+				// if(query.get("token"))
+				// {	
+				// 	var token = query.get("token")
+				// 	//App.deferReadiness();
+				// 	var controller = App.__container__.lookup('controller:application');
+				// 	controller.get('session').authenticate('authenticator:token',token);	
+				// }	
+		};
 
 		return App;
 	}

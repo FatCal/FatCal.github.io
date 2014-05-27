@@ -25,6 +25,9 @@ require.config({
 		'token-auth': 		'js/lib/auth/token',
 		'foundation': 		'components/foundation/js/foundation.min',
 
+		'pickadate-date-component': 'app/components/pick-a-date',
+		'pickadate-time-component': 'app/components/pick-a-time'
+
 	},
 	deps: ['ember'],
 	bundles:
@@ -96,8 +99,8 @@ require(
 
 		// components
 		'app/components/radio-button',
-		'app/components/pick-a-date',
-		'app/components/pick-a-time',
+		'pickadate-date-component',
+		'pickadate-time-component',
 
 		// app
 		'app/app'
@@ -113,7 +116,7 @@ require(
 			console.log("trying redirect");
 
 			var prevLocation = window.location.href
-			window.location = "fatcal://";
+			window.location = "raft://";
 			window.location = prevLocation;
 		}
 	}

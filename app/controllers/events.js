@@ -5,15 +5,50 @@ define
 		'ember',
 		'moment',
 		'jstz',
-		'ember-simple-auth'
+		'ember-simple-auth',
+		'pickadate-date-component',
+		'pickadate-time-component'
 	],function(App,ember,moment,jstz)
 	{
+		function updateDate(date,value)
+		{
+			if(value.year != undefined)
+			{
+				date.year(value.year);
+				date.month(value.month);
+				date.date(value.date);
+			}
+			else if(value.hour != undefined)
+			{
+				date.hour(value.hour);
+				date.minutes(value.mins);
+			}
+			return date;
+		};
 
 		App.EventsController = Ember.ArrayController.extend
 		({
 		});
 
 		App.EventEditController = Ember.ObjectController.extend({
+			startTime: function(key,value,prevValue){
+				if(value != undefined)
+				{
+					var date = updateDate(moment(this.get('model.start_time')),value);
+					this.set('model.start_time',date.toDate());
+				}
+
+				return this.get('model.start_time');
+			}.property('start_time'),
+			endTime: function(key,value,prevValue){
+				if(value != undefined)
+				{
+					var date = updateDate(moment(this.get('model.end_time')),value);
+					this.set('model.end_time',date.toDate());
+				}
+
+				return this.get('model.end_time');
+			}.property('start_time'),		
 			actions:{
 				save: function(){
 					this.get('model').save();

@@ -1,7 +1,7 @@
 define
 (
-	["app/app"],
-	function(App)
+	["app/app",'moment'],
+	function(App,moment)
 	{
 		App.PickATime = Ember.Component.extend({
 			attributes:['clear','format','formatLabel','formatSubmit','hiddenPrefix','hiddenSuffix','interval','min','max','disable'],
@@ -33,7 +33,7 @@ define
 				}
 
 				options.onStart = function(){
-					this.set('select',Ember.get(self,'value'));
+					this.set('select',moment(Ember.get(self,'value')).toDate());
 				}
 
 				this.$().pickatime(options);				

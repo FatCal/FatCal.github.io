@@ -13,20 +13,15 @@
         <!--script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script -->
         <script type="text/javascript" src="/js/main.min.js"></script>
 
-        <script type="text/x-handlebars" id="dashboard">
-            helu
-        </script>
-
         <script type="text/x-emblem" id="fix">
         </script>
 
         <script type="text/x-emblem" id="external">
             div class="row event"
                 div class="small-12 medium-8 medium-offset-2 panel"
-                    p This event was created in FatCal by #{publisher.user.displayName}. Reply by clicking “Going”, “Maybe” or “No” below. That way #{publisher.user.firstname} will know that you if you are going or not. 
+                    p This event was created in Raft by #{publisher.user.displayName}. Raft is a mircro community for planning time developed in Stockholm. 
 
-                    p Since you do not have FatCal yourself yet, you will have to write the details down yourself but we are working hard to be able to allow more users into FatCal. In the meantime, head over and sign up for a beta account on <a href="http://www.fatcal.com/" targer="_new">www.fatcal.com</a>
-
+                    p Reply by clicking “Going”, “Maybe” or “No” below. That way #{publisher.user.firstname} will know that you if you are going or not. 
             if isNotEditing
                 div class="row event"
                     div class="small-12 columns title"
@@ -62,22 +57,22 @@
 
                 div class="row event"
                     div{bind-attr class=":small-12 :medium-8 :medium-offset-2 :panel :callout showHero:visible:hidden"}
-                        p{bind-attr class="showAttendingHero:visible:hidden"} 
-                            |#{publisher.user.firstname} will be real happy that you have decided to go!
-                        p{bind-attr class="showMaybeHero:visible:hidden"}
-                            |Ok so you haven't decided yet but we both know that 'maybe' is just the polite way of saying that you don't really want to go and is holding out for something better.
-                        p{bind-attr class="showRejectHero:visible:hidden"}
-                            |Not going. #{publisher.user.firstname} will be sad that you're not coming but happy to know at least. That's always something.
+                        p Thank you! We will let  #{publisher.user.firstname} know.
+
+                        // p{bind-attr class="showAttendingHero:visible:hidden"} 
+                        //     |#{publisher.user.firstname} will be real happy that you have decided to go!
+                        // p{bind-attr class="showMaybeHero:visible:hidden"}
+                        //     |Ok so you haven't decided yet but we both know that 'maybe' is just the polite way of saying that you don't really want to go and is holding out for something better.
+                        // p{bind-attr class="showRejectHero:visible:hidden"}
+                        //     |Not going. #{publisher.user.firstname} will be sad that you're not coming but happy to know at least. That's always something.
                 // div class="row event-controls"
                 //     div class="col-md-4"
                 //         button.btn.btn-default click="edit" Edit
                 //         button.btn.btn-primary click="back" Back
                 div class="row event"
                     div class="small-12 medium-8 medium-offset-2 panel"
-                        p FatCal is a new tool for organizing your own time and plan events with people you care about. FatCal is developed in Stockholm and we are currently testing it among early adopters around Sweden. 
-
-                        p Read more about us at <a href="http://www.fatcal.com" target="_new">www.fatcal.com</a>
-
+                        p Raft is a is micro community for planning time. Raft is developed in Stockholm and we are currently testing it among early adopters around Sweden. Do you want to test Raft too? Send an email to <a href="mailto:anders@joinraft.com">anders@joinraft.com</a> and we will set you up. 
+                        p Read more about us at <a href="http://www.joinraft.com">www.joinraft.com</a>
             // else
             //     = partial 'event/edit'
 
@@ -209,6 +204,22 @@
 
         <script type="text/x-emblem" id="event/edit">
             div.row class="editEvent"
+                div.columns.small-6.medium-3
+                    label
+                        |Start date
+                    pick-a-date valueBinding="content.date" class="form-control" value=startTime
+                div.columns.small-6.medium-3
+                    label
+                        |Start time
+                    pick-a-time valueBinding="content.date" class="form-control" value=startTime interval=5
+                div.columns.small-6.medium-3
+                    label
+                        |End date
+                    pick-a-date valueBinding="content.date" class="form-control" value=endTime
+                div.columns.small-6.medium-3
+                    label
+                        |End time
+                    pick-a-time valueBinding="content.date" class="form-control" value=endTime interval=5            
                 div.columns.small-12
                     label 
                         |Title

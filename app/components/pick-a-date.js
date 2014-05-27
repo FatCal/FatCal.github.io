@@ -1,7 +1,7 @@
 define
 (
-	['app/app'],
-	function(App)
+	['app/app','moment','pickadate'],
+	function(App,moment)
 	{
 		App.PickADate = Ember.Component.extend({
 			attributes:['monthsFull', 'monthsShort', 'weekdaysFull', 'weekdaysShort', 'showMonthsShort', 'showWeekdaysFull', 'today','clear', 'format', 'formatSubmit', 'hiddenSuffix', 'firstDay', 'selectMonths','selectYears', 'min', 'max', 'disable', 'disablePicker'],
@@ -33,7 +33,7 @@ define
 				}
 
 				options.onStart = function(){
-					this.set('select',Ember.get(self,'value'));
+					this.set('select',moment(Ember.get(self,'value')).toDate());
 				}
 
 				this.$().pickadate(options);
