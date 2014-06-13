@@ -11,6 +11,7 @@ define
 		App.Event = DS.Model.extend({
 			publisher: DS.belongsTo('calendar'),
 			attendees: DS.hasMany('attendee',{async: true}),
+//			comments: DS.hasMany('comments',{async: true}),
 
 			title: DS.attr("string"),
 			description: DS.attr("string"),
@@ -25,7 +26,8 @@ define
 				ts = moment(start_time);
 				te = moment(end_time);
 				return ts.format("dddd Do MMMM") + ", " + ts.format("h:mm a")+" - "+te.format("h:mm a");
-			}.property('start_time','end_time')
+			}.property('start_time','end_time'),
+
 
 //			modules: DS.hasMany('module')
 		});
@@ -79,6 +81,13 @@ define
 			calendar: DS.belongsTo("calendar"),
 			name: DS.attr(),
 			logo: DS.attr()
+		});
+
+		App.Comment = DS.Model.extend({
+			calendar: DS.belongsTo("calendar"),
+			event: DS.belongsTo("event"),
+			body: DS.attr(),
+			created_at: DS.attr("ISO8601")
 		});
 
 

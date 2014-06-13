@@ -31,9 +31,17 @@ define
 		});
 
 		App.EventEditController = Ember.ObjectController.extend({
+			// isNotDirty: function()
+			// {
+			// 	var model = this.get('model');
+			// 	var isDirty = Ember.EnumerableUtils.intersection(['description','start_time'],Object.keys(model.changedAttributes())).length > 0;
+			// 	console.log("isDirty:" + isDirty);
+			// 	return !isDirty;
+			// }.property('end_time','title','description'),
 			startTime: function(key,value,prevValue){
 				if(value != undefined)
 				{
+					console.log("setting time");
 					var date = updateDate(moment(this.get('model.start_time')),value);
 					this.set('model.start_time',date.toDate());
 				}
@@ -48,7 +56,7 @@ define
 				}
 
 				return this.get('model.end_time');
-			}.property('start_time'),		
+			}.property('start_time'),	
 			actions:{
 				save: function(){
 					this.get('model').save();
@@ -129,6 +137,10 @@ define
 //				return tz.name();
 				return this.get('model.tz');
 			}.property('model.tz'),
+			comments: function(controller,property)
+			{
+				
+			},
 			actions: {
 				edit: function()
 				{

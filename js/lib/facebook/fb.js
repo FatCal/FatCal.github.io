@@ -14,6 +14,8 @@ define(['facebook','ember','ember-simple-auth'], function(){
   	if(response.status == 'connected')
 	  	indexController.get('session').authenticate('authenticator:fatcal',response.authResponse);
 	  else
+    {
 		  indexController.get('session').invalidate();
+    }
   });
 });

@@ -36,6 +36,7 @@ define
 	
 			extractSingle: function(store,type,payload,id,requestType)
 			{
+				console.log("extracting "+type);
 				console.log(payload);
 
 
@@ -61,8 +62,14 @@ define
 				else if("app" == rootType)
 				{
 				//	var users = payload.users;
-					var calendar = payload.calendar
+					var calendar = payload.calendar;
 					payload = {app: payload, calendar: calendar}
+				}
+				else if("comment" == rootType)
+				{
+					var calendar = payload.calendar;
+					var event = payload.event;
+					payload = {comment: payload, calendar: calendar, event: event};
 				}
 				else
 				{
@@ -78,11 +85,11 @@ define
 			},
 			normalize: function(type,prop,hash)
 			{
-
 				if("App.Event" == type)
 				{
 					prop.publisher = prop.publisher.id;
 					prop.attendees = prop.attendees.mapProperty("id");
+//					prop.comments = prop.comments.mapProperty("id");
 				}
 				else if("App.Attendee" == type)
 				{
@@ -104,6 +111,11 @@ define
 				{
 					if(prop.calendar)
 						prop.calendar = prop.calendar.id
+				}
+				else if("App.Comment" == type)
+				{
+
+
 				}
 				return this._super(type,prop,hash);
 			},

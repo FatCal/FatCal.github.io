@@ -10,8 +10,8 @@
         <link rel="stylesheet" href="/css/style.min.css"/>
 
         <!-- JS -->
-        <!--script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script -->
-        <script type="text/javascript" src="/js/main.min.js"></script>
+        <script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script>
+        <!--script type="text/javascript" src="/js/main.min.js"></script -->
 
         <script type="text/x-emblem" id="fix">
         </script>
@@ -69,6 +69,11 @@
                 //     div class="col-md-4"
                 //         button.btn.btn-default click="edit" Edit
                 //         button.btn.btn-primary click="back" Back
+                div.row.event
+                    div.small-12
+                        p Chat
+                    
+
                 div class="row event"
                     div class="small-12 medium-8 medium-offset-2 panel"
                         p Raft is a is micro community for planning time. Raft is developed in Stockholm and we are currently testing it among early adopters around Sweden. Do you want to test Raft too? Send an email to <a href="mailto:anders@joinraft.com">anders@joinraft.com</a> and we will set you up. 
@@ -229,8 +234,8 @@
                         |Description
                         = textarea value=description 
                 div.columns.small-12
-                    button{action 'save'} Save
-        </script>
+                      button{action 'save'} Save
+         </script>
 
     </head>
     <body> 

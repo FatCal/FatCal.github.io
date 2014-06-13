@@ -14,7 +14,7 @@ define(['app/app','moment'],function(App,moment){
 			// },2000);
 			// return arr;
 		 	var calendarId = this.get('model.calendar.id');
-		 	var date = moment().startOf('day').format();
+		 	var date = moment().startOf('day').subtract('years',1).format();
 		 	var yearFromNow = moment().startOf('day').add('years',1).format();
 			return this.store.find('event',{calendars: [calendarId], filter_from: date, filter_to: yearFromNow});
 
