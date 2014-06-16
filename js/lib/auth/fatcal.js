@@ -10,10 +10,8 @@ define(['jquery','ember','ember-simple-auth'],function(){
 					'facebook_access_token' : options.accessToken	
 				}		
 				console.log(params);	
-				$.post('http://fatcal.datareklam.se/api/v1/oauth/access_token',params)
+				$.post('http://api.fatcal.com/api/v1/oauth/access_token',params)
 					.done(function(data){
-						console.log("Success: "+data.data.access_token);
-						console.log(data);
 						controller = App.__container__.lookup("controller:application");
 						controller.set('session.access_token',data.data.access_token);
 						DS.ActiveModelAdapter.reopen({
@@ -44,8 +42,7 @@ define(['jquery','ember','ember-simple-auth'],function(){
 						"Authorization": " "
 					}
 				});	
-				App.me = null;
-				FB.logout();
+				App.set('me',null);
 				resolve();
 			});
 		}

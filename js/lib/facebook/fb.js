@@ -12,8 +12,11 @@ define(['facebook','ember','ember-simple-auth'], function(){
   	var indexController = App.__container__.lookup('controller:application');
   	console.log(indexController);
   	if(response.status == 'connected')
-	  	indexController.get('session').authenticate('authenticator:fatcal',response.authResponse);
-	  else
+    {
+      if(!indexController.get('session').isAuthenticated)
+	  	  indexController.get('session').authenticate('authenticator:fatcal',response.authResponse);
+	  }
+    else
     {
 		  indexController.get('session').invalidate();
     }
