@@ -111,17 +111,17 @@ require(
 	], function(){
 
 		console.log("loaded");
-		var parser = new UAParser();
-		var result = parser.getResult();
-		console.log(result.os.name);
-		if(result.device.type == 'mobile' && result.os.name == 'iOS')
-		{
-			console.log("trying redirect");
+		// var parser = new UAParser();
+		// var result = parser.getResult();
+		// console.log(result.os.name);
+		// if(result.device.type == 'mobile' && result.os.name == 'iOS')
+		// {
+		// 	console.log("trying redirect");
 
-			var prevLocation = window.location.href
-			window.location = "raft://";
-			window.location = prevLocation;
-		}
+		// 	var prevLocation = window.location.href
+		// 	window.location = "raft://";
+		// 	window.location = prevLocation;
+		// }
 	}
 );
 
