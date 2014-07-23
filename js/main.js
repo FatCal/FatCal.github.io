@@ -104,7 +104,6 @@ require(
 		'app/components/radio-button',
 		'pickadate-date-component',
 		'pickadate-time-component',
-		'delete-button',
 
 		// app
 		'app/app'
