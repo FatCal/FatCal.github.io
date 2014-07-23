@@ -9,4 +9,6 @@ define(['app/app','facebook'],function(){
 			}
 		}
 	});
+
+	App.IndexController = App.ApplicationController.extend({});
 });

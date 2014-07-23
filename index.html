@@ -10,7 +10,7 @@
         <link rel="stylesheet" href="/css/style.min.css"/>
 
         <!-- JS -->
-        <!-- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script -->
+        <!-- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script-->
         <script type="text/javascript" src="/js/main.min.js"></script>
 
         <script type="text/x-emblem" id="fix">
@@ -134,6 +134,9 @@
             div.row
                 div.columns.small-12 style="font-size:100pt;padding-top:24px"
                     |RAFT
+            div.row
+                div.columns.small-12.medium-4.medium-offset-4
+                    a.button click="login" style='width:100%' Login
 
 
         </script> 
@@ -150,10 +153,17 @@
             nav.top-bar data-topbar=""
                 ul.title-area
                     li.name
-                        h1 
-                            link-to 'index' | Raft
+                        // h1 
+                        //     link-to 'index' | Raft
+                    li.toggle-topbar.menu-icon 
+                        a href="#"
+                            span
                 section.top-bar-section
                     ul.right
+                        li
+                            a href="#" Hai
+                        li 
+                            a href="#" Thaar
                         if session.isAuthenticated
                             // li
                             //     link-to 'events' | Upcoming
@@ -168,9 +178,6 @@
                                 ul.dropdown
                                     li
                                         a click="logout" Logout 
-                        else
-                            li.active
-                                a click="login" Login 
  
             div {{outlet}}
         </script>
