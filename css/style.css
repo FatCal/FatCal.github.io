@@ -1,5 +1,5 @@
 @import url(../components/foundation/css/normalize.css);
-@import url(../components/foundation/css/foundation.min.css);
+@import url(../components/foundation/css/foundation.css);
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import url(../components/pickadate/lib/themes/default.css);
 @import url(../components/pickadate/lib/themes/default.date.css);
@@ -77,5 +77,8 @@ nav {
   .event .hidden {
     display: none; }
 
-.editEvent textarea {
-  height: 10em; }
+.editEvent {
+  text-align: left;
+  margin-top: 10px; }
+  .editEvent textarea {
+    height: 10em; }

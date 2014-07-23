@@ -26,18 +26,12 @@ define
 			return date;
 		};
 
-		App.EventsController = Ember.ArrayController.extend
-		({
+		App.EventsIndexController = Ember.ArrayController.extend({
+			sortProperties: ['filter_time'],
+			sortAscending: true
 		});
 
-		App.EventEditController = Ember.ObjectController.extend({
-			// isNotDirty: function()
-			// {
-			// 	var model = this.get('model');
-			// 	var isDirty = Ember.EnumerableUtils.intersection(['description','start_time'],Object.keys(model.changedAttributes())).length > 0;
-			// 	console.log("isDirty:" + isDirty);
-			// 	return !isDirty;
-			// }.property('end_time','title','description'),
+		App.EventsNewController = Ember.ObjectController.extend({
 			startTime: function(key,value,prevValue){
 				if(value != undefined)
 				{
@@ -59,7 +53,75 @@ define
 			}.property('start_time'),	
 			actions:{
 				save: function(){
-					this.get('model').save();
+					this.get('model').save().then(function(){
+						this.controller.transitionToRoute('events.index');
+					});
+
+				}
+			}			
+		});
+
+		App.EventsEditController = Ember.ObjectController.extend({
+			// isNotDirty: function()
+			// {
+			// 	var model = this.get('model');
+			// 	var isDirty = Ember.EnumerableUtils.intersection(['description','start_time'],Object.keys(model.changedAttributes())).length > 0;
+			// 	console.log("isDirty:" + isDirty);
+			// 	return !isDirty;
+			// }.property('end_time','title','description'),
+			isCreating: false,
+			successMessage: null,
+			// startDateDisabled: true,
+			// startTimeDisabled: true,
+			// endDateDisabled: true,
+			// endTimeDisabled: true,
+			startTime: function(key,value,prevValue){
+				if(value != undefined)
+				{
+					var date = updateDate(moment(this.get('model.start_time')),value);
+					this.set('model.start_time',date.toDate());
+				}
+
+				return this.get('model.start_time');
+			}.property('start_time'),
+			endTime: function(key,value,prevValue){
+				if(value != undefined)
+				{
+					var date = updateDate(moment(this.get('model.end_time')),value);
+					this.set('model.end_time',date.toDate());
+				}
+
+				return this.get('model.end_time');
+			}.property('start_time'),
+			eventTypeUpdated: function()
+			{
+				console.log("changed value: "+this.get('model.event_type'));
+			//	this.set('startDateDisabled',false);
+			//	this.set('startTimeDisabled',false);
+			}.observes('model.event_type'),
+			actions:{
+				save: function(){
+					var self = this;
+					this.get('model').save().then(function(){
+						self.set('isCreating',false);
+						self.set('successMessage','Event created');
+//						this.controller.transitionToRoute('events.index');
+					});
+				},
+				update: function(){
+					var self = this;
+					this.get('model').save().then(function(){
+						self.set('updated',true);
+						self.set('successMessage','Event updated');
+					});
+				},
+				delete: function(){
+					var self = this;
+					//var app_id = this.get('model').get('publisher').get('application').get('id');
+					this.get('model').destroyRecord().then(function(){
+						//self.transitionToRoute('app.'+app_id+'.events.index');
+						self.transitionToRoute('apps');
+					});
 				}
 			}
 		});

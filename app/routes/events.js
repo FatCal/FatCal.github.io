@@ -1,4 +1,4 @@
-define(['app/app','query'],function(App)
+define(['app/app','moment'],function(App,moment)
 	{
 		console.log("Configuring Event routes");
 		App.EventsRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
@@ -61,10 +61,43 @@ define(['app/app','query'],function(App)
 			}
 		});
 
-		App.EventEditRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
+		App.EventsIndexRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
+			// setupController: function(controller){
+			// 	console.log("fetching events for");
+			// 	console.log(this.modelFor('app').get('calendar'));	
+			// 	controller.set('model',this.modelFor('app').get('calendar').get('events'));
+			// }
+			model: function(){
+				var id = this.modelFor('app').get('calendar').get('id');
+				return this.store.find('event',{
+					calendars: [id], 
+					filter_from: moment().subtract('years',1).format(),
+					filter_to: moment().add('years',1).format()
+				});
+			}
+		});
+
+		App.EventsNewRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
+			controllerName: 'eventsEdit',
+			renderTemplate: function(){
+				this.render('events/edit');
+			},
+			setupController: function(controller)
+			{
+				controller.set('successMessage',null);
+				controller.set('isCreating',true);
+				controller.set('model',this.store.createRecord('event',{
+					publisher: this.modelFor('app').get('calendar'),
+					tz: 'Europe/Stockholm',
+					event_type: 0
+				}));
+			}
+		});
+
+		App.EventsEditRoute = Ember.Route.extend(Ember.SimpleAuth.AuthenticatedRouteMixin,{
 			setupController: function(controller,event)
 			{
-				console.log("editing route");
+				controller.set('successMessage',null);
 				controller.set('model',event);
 			}
 		});

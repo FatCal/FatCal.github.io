@@ -7,11 +7,11 @@
         <meta name="viewport" content="width=device-width">
 
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/style.min.css"/>
+        <link rel="stylesheet" href="/css/style.css"/>
 
         <!-- JS -->
-        <!-- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script -->
-        <script type="text/javascript" src="/js/main.min.js"></script>
+        <script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script>
+        <!-- script type="text/javascript" src="/js/main.min.js"></script -->
 
         <script type="text/x-emblem" id="fix">
         </script>
@@ -127,6 +127,7 @@
                                         = when
                                     td
                                         = title
+
         </script>  
 
         <script type="text/x-emblem" id="index">
@@ -154,8 +155,8 @@
                 section.top-bar-section
                     ul.right
                         if session.isAuthenticated
-                            li
-                                link-to 'events' | Upcoming
+                            // li
+                            //     link-to 'events' | Upcoming
                             li
                                 link-to 'apps' | Apps
                             li
@@ -192,22 +193,45 @@
 
         <script type="text/x-emblem" id="app">
             div.row
-                div.columns.small-12
-                    h1 = controller.name
+                div.columns.small-12 style="text-align: left;"
+                    h2 = controller.name
+
+            = outlet
+                  
+            // div.row
+            //     div.columns.small-12
+            //         table style="text-align: left;"
+            //             tbody
+            //                 each e in evnts
+            //                     link-to 'event.edit' e tagName='tr'
+            //                         td
+            //                             = e.when
+            //                         td
+            //                             = e.title
+
+        </script>
+
+        <script type="text/x-emblem" id="events/index">
+            div.row
+                div.columns.small-3
+                    link-to 'Create new event' 'events.new' class='button' 
+
             div.row
                 div.columns.small-12
                     table style="text-align: left;"
                         tbody
-                            each e in evnts
-                                link-to 'event.edit' e tagName='tr'
+                            each
+                                link-to 'events.edit' this tagName='tr'
                                     td
-                                        = e.when
+                                        = when
                                     td
-                                        = e.title
-
+                                        = title
         </script>
 
-        <script type="text/x-emblem" id="event/edit">
+        <script type="text/x-emblem" id="events/new">
+            div.row
+                div.columns.small-12
+                    h1 Create new event
             div.row class="editEvent"
                 div.columns.small-6.medium-3
                     label
@@ -235,6 +259,75 @@
                         = textarea value=description 
                 div.columns.small-12
                       button{action 'save'} Save
+
+        </script>
+
+        <script type="text/x-emblem" id="events/edit">
+            if successMessage
+                div.row
+                    div.columns.small-12.alert-box.success
+                        = successMessage
+
+            div.row class="editEvent"
+                div.columns.small-12
+                    h4.subheader Event type
+                div.columns.small-6.medium-3
+                    label
+                        radio-button name="eventType" selectionBinding="event_type" value="0"
+                            |&nbsp;Normal
+                div.columns.small-6.medium-3
+                    label
+                        radio-button name="eventType" selectionBinding="event_type" value="1" 
+                            |&nbsp;Deadline
+                div.columns.small-6.medium-3
+                    label
+                        radio-button name="eventType" selectionBinding="event_type" value="2" 
+                            |&nbsp;Startline
+                div.columns.small-6.medium-3
+                    label
+                        radio-button name="eventType" selectionBinding="event_type" value="4" 
+                            |&nbsp;Tag
+
+            div.row class="editEvent"
+                div.columns.small-12
+                    h4.subheader Dates
+                div.columns.small-6.medium-3
+                    label
+                        |Start date
+                    pick-a-date valueBinding="content.date" class="form-control" value=startTime disabled=true
+                div.columns.small-6.medium-3
+                    label
+                        |Start time
+                    pick-a-time valueBinding="content.date" class="form-control" value=startTime interval=5 
+                div.columns.small-6.medium-3
+                    label
+                        |End date
+                    pick-a-date valueBinding="content.date" class="form-control" value=endTime
+                div.columns.small-6.medium-3
+                    label
+                        |End time
+                    pick-a-time valueBinding="content.date" class="form-control" value=endTime interval=5
+
+            div.row class="editEvent"
+                div.columns.small-12
+                    h4.subheader Content            
+                div.columns.small-12
+                    label 
+                        |Title
+                        = input type="text" value=title
+                div.columns.small-12
+                    label
+                        |Description
+                        = textarea value=description 
+            div.row
+                if isCreating
+                    div.columns.small-12
+                        button{action 'save'} Save
+                else
+                    div.columns.small-6.medium-2.medium-offset-8
+                        button{action 'update'} Update
+                    div.columns.small-6.medium-2
+                        button{action 'delete'} class="alert" Delete
          </script>
 
     </head>

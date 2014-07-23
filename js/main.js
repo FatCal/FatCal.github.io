@@ -3,7 +3,7 @@ require.config({
 //	urlArgs: "bust=" + (new Date()).getTime(),
 	paths:
 	{
-		'jquery': 			'components/jquery/jquery',
+		'jquery': 			'components/jquery/dist/jquery',
 		'handlebars': 		'components/handlebars/handlebars',
 		'emblem':			'components/emblem.js/emblem',
 		'ember': 			'components/ember/ember',
@@ -87,6 +87,9 @@ require(
 		'app/models/models',
 		'app/store',
 
+		// views
+		'app/views/events',
+
 		// routes
 		'app/routes/application_route',
 		'app/routes/index_route',
@@ -101,6 +104,7 @@ require(
 		'app/components/radio-button',
 		'pickadate-date-component',
 		'pickadate-time-component',
+		'delete-button',
 
 		// app
 		'app/app'

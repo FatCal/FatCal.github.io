@@ -16,13 +16,21 @@ define
 		(
 			function () 
 			{
+				// this.resource("events",{path: 'events/:event_id'}, function(){
+				// 	this.route("edit");
+				// 	this.route("new");
+				// });
 				this.route("events",{path: "/events"});
 				this.route("event",{path: '/event/:event_id'});
 				this.route("event.edit",{path: 'event/:event_id/edit'});
 				this.route("external",{path: 'external/:id'});
 
 				this.route("apps",{path: "/apps"});
-				this.resource("app",{path: '/app/:app_id'});
+				this.resource("app",{path: '/app/:app_id'},function(){
+					this.resource("events.index");
+					this.resource("events.new");
+					this.resource("events.edit");
+				});
 
 				this.route("dashboard",{path: "/dashboard"});
 

@@ -1,6 +1,6 @@
 @import "bourbon/bourbon";
 @import "../components/foundation/css/normalize.css";
-@import "../components/foundation/css/foundation.min.css";
+@import "../components/foundation/css/foundation.css";
 @import url(http://fonts.googleapis.com/css?family=Lato:100,300,400,700);
 @import "../components/pickadate/lib/themes/default.css";
 @import "../components/pickadate/lib/themes/default.date.css";
@@ -131,5 +131,7 @@ nav {
 	textarea {
 		height: 10em;
 	}
+	text-align: left;
+	margin-top: 10px;
 }
 

@@ -7,7 +7,7 @@ define
 	],function(App){
 		
 		App.Adapter = DS.ActiveModelAdapter.reopen({
-				host: 'http://fatcal.datareklam.se',
+				host: 'http://api.joinraft.com',
 				namespace: 'api/v1',
 				headers: {},
 				pathForType: function(type){
@@ -131,6 +131,7 @@ define
 			},
 			serializeBelongsTo: function(record,json,relationship)
 			{
+			//	debugger;
 				var key = relationship.key;
 				var belongsToRecord = Ember.get(record,key);
 				

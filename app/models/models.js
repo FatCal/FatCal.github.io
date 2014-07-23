@@ -19,6 +19,7 @@ define
 			end_time: DS.attr("ISO8601"),
 			filter_time: DS.attr("ISO8601"),
 			tz: DS.attr("string"),
+			event_type: DS.attr(),
 
 			when: function(){
 				var start_time = this.get('start_time');
@@ -33,8 +34,8 @@ define
 		});
 
 		App.Calendar = DS.Model.extend({
-			user: DS.belongsTo("user")
-			//application: DS.belongsTo("application")
+			user: DS.belongsTo("user"),
+//			application: DS.belongsTo("app")
 		});
 
 		App.User = DS.Model.extend({
@@ -42,7 +43,7 @@ define
 			firstname: DS.attr(),
 			lastname: DS.attr(),
 			email: DS.attr(),
-			avatar : DS.attr(),
+			avatar: DS.attr(),
 
 			displayName: function(){
 				if(App.me.id == this.id)
