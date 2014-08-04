@@ -86,11 +86,30 @@ define(['app/app','moment'],function(App,moment)
 			{
 				controller.set('successMessage',null);
 				controller.set('isCreating',true);
-				controller.set('model',this.store.createRecord('event',{
+				var store = this.store;
+				var e = store.createRecord('event',{
 					publisher: this.modelFor('app').get('calendar'),
 					tz: 'Europe/Stockholm',
 					event_type: 0
-				}));
+				});
+				var i = 0;
+				var mod = store.createRecord('module',{name: 'title', moduleData: {}, event: e});
+//				e.get('modules').pushObject(mod);
+				// e.get('modules').createRecord({name: 'title', moduleData: {}});
+
+
+				// e.get('modules').then(function(ev){
+				// 	ev.get('modules').createRecord({name: name, moduleData: {}});
+				// });
+
+				// e.get('modules').pushObjects(['title','description','time','alerts','location'].map(function(name){
+				// 	i++;
+				// 	//return store.push("module",{id: i,name: name, moduleData: {}});
+				// 	return store.createRecord('module',{name: name, moduleData: {}});
+				// }));
+				// debugger;
+				controller.set('model',e);
+
 			}
 		});
 

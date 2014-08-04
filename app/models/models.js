@@ -8,10 +8,20 @@ define
 	],
 	function(App,moment)
 	{
+
+		App.Module = DS.Model.extend({
+//			event: DS.belongsTo("event",{inverse: 'modules'}),
+			event: DS.belongsTo("event"),
+			name: DS.attr(),
+			moduleData: DS.attr()
+		});
+
+
 		App.Event = DS.Model.extend({
 			publisher: DS.belongsTo('calendar'),
 			attendees: DS.hasMany('attendee',{async: true}),
-//			comments: DS.hasMany('comments',{async: true}),
+			modules: DS.hasMany('module',{embedded: 'always'}),
+			comments: DS.hasMany('comments'),
 
 			title: DS.attr("string"),
 			description: DS.attr("string"),
@@ -35,7 +45,7 @@ define
 
 		App.Calendar = DS.Model.extend({
 			user: DS.belongsTo("user"),
-//			application: DS.belongsTo("app")
+			app: DS.belongsTo("app")
 		});
 
 		App.User = DS.Model.extend({

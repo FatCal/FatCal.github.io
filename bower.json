@@ -5,7 +5,7 @@
     "jquery": "latest",
 
     "ember": "latest",
-    "ember-data-shim": "1.0.0-beta.7",
+    "ember-data-shim": "1.0.0-beta.8",
     "emblem.js": "latest",
     "ember-simple-auth": "latest",
 

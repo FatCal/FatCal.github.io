@@ -31,35 +31,35 @@ define
 			sortAscending: true
 		});
 
-		App.EventsNewController = Ember.ObjectController.extend({
-			startTime: function(key,value,prevValue){
-				if(value != undefined)
-				{
-					console.log("setting time");
-					var date = updateDate(moment(this.get('model.start_time')),value);
-					this.set('model.start_time',date.toDate());
-				}
+		// App.EventsNewController = Ember.ObjectController.extend({
+		// 	startTime: function(key,value,prevValue){
+		// 		if(value != undefined)
+		// 		{
+		// 			console.log("setting time");
+		// 			var date = updateDate(moment(this.get('model.start_time')),value);
+		// 			this.set('model.start_time',date.toDate());
+		// 		}
 
-				return this.get('model.start_time');
-			}.property('start_time'),
-			endTime: function(key,value,prevValue){
-				if(value != undefined)
-				{
-					var date = updateDate(moment(this.get('model.end_time')),value);
-					this.set('model.end_time',date.toDate());
-				}
+		// 		return this.get('model.start_time');
+		// 	}.property('start_time'),
+		// 	endTime: function(key,value,prevValue){
+		// 		if(value != undefined)
+		// 		{
+		// 			var date = updateDate(moment(this.get('model.end_time')),value);
+		// 			this.set('model.end_time',date.toDate());
+		// 		}
 
-				return this.get('model.end_time');
-			}.property('start_time'),	
-			actions:{
-				save: function(){
-					this.get('model').save().then(function(){
-						this.controller.transitionToRoute('events.index');
-					});
+		// 		return this.get('model.end_time');
+		// 	}.property('start_time'),	
+		// 	actions:{
+		// 		save: function(){
+		// 			this.get('model').save().then(function(){
+		// 				this.controller.transitionToRoute('events.index');
+		// 			});
 
-				}
-			}			
-		});
+		// 		}
+		// 	}			
+		// });
 
 		App.EventsEditController = Ember.ObjectController.extend({
 			// isNotDirty: function()
@@ -105,11 +105,16 @@ define
 					this.get('model').save().then(function(){
 						self.set('isCreating',false);
 						self.set('successMessage','Event created');
+						// this.get('model').get('modules').forEach(function(mod,index){
+						// 	debugger;
+						// });
+
 //						this.controller.transitionToRoute('events.index');
 					});
 				},
 				update: function(){
 					var self = this;
+					debugger;
 					this.get('model').save().then(function(){
 						self.set('updated',true);
 						self.set('successMessage','Event updated');

@@ -3,14 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>FatCal</title>
+        <title>Raft</title>
         <meta name="viewport" content="width=device-width">
 
         <!-- Custom CSS -->
         <link rel="stylesheet" href="/css/style.min.css"/>
 
         <!-- JS -->
-        <!-- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script-->
+        <!-- script type="text/javascript" src="components/requirejs/require.js" data-main="/js/main"></script -->
         <script type="text/javascript" src="/js/main.min.js"></script>
 
         <script type="text/x-emblem" id="fix">
@@ -260,7 +260,7 @@
                     label
                         |Description
                         = textarea value=description 
-                div.columns.small-12
+                div.columns.small-12.medium-1.medium-offset-11
                       button{action 'save'} Save
 
         </script>
@@ -324,7 +324,7 @@
                         = textarea value=description 
             div.row
                 if isCreating
-                    div.columns.small-12
+                    div.columns.small-12.medium-2.medium-offset-10
                         button{action 'save'} Save
                 else
                     div.columns.small-6.medium-2.medium-offset-8
