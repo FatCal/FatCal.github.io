@@ -93,7 +93,7 @@ define(['app/app','moment'],function(App,moment)
 					event_type: 0
 				});
 				var i = 0;
-				var mod = store.createRecord('module',{name: 'title', moduleData: {}, event: e});
+//				var mod = store.createRecord('module',{name: 'title', moduleData: {}, event: e});
 //				e.get('modules').pushObject(mod);
 				// e.get('modules').createRecord({name: 'title', moduleData: {}});
 
@@ -102,11 +102,10 @@ define(['app/app','moment'],function(App,moment)
 				// 	ev.get('modules').createRecord({name: name, moduleData: {}});
 				// });
 
-				// e.get('modules').pushObjects(['title','description','time','alerts','location'].map(function(name){
-				// 	i++;
-				// 	//return store.push("module",{id: i,name: name, moduleData: {}});
-				// 	return store.createRecord('module',{name: name, moduleData: {}});
-				// }));
+				e.get('modules').pushObjects(['title','description','time','going','alerts','location'].map(function(name){
+					//return store.push("module",{id: i,name: name, moduleData: {}});
+					return store.createRecord('module',{name: name, moduleData: {}});
+				}));
 				// debugger;
 				controller.set('model',e);
 
